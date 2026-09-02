@@ -1,4 +1,8 @@
 package com.hireon.backend.Model;
 
-public class Student {
+import org.springframework.web.bind.annotation.RestController;
+
+@RestController
+public class Student extends User{
+
 }
