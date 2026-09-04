@@ -30,8 +30,7 @@ public class Student extends User{
     private String resume_url;
     private String Linkedin_url;
     private String placement_status;
-    private Long comp_id;
-//    @ManyToOne
-//    @JoinColumn(name = "comp_id")
-//    private Company company;
+    @ManyToOne
+    @JoinColumn(name = "comp_id")
+    private Company company;
 }
