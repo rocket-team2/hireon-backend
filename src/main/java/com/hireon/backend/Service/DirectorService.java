@@ -22,7 +22,6 @@ public class DirectorService {
         Director director=directorRepo.findById(id)
                 .orElseThrow(()-> new RuntimeException("Director Not Found"));
         director.setName(request.getName());
-        System.out.println(request.getName());
         director.setEmail(request.getEmail());
 
         return directorRepo.save(director);

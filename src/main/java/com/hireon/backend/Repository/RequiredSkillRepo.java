@@ -1,4 +1,7 @@
 package com.hireon.backend.Repository;
 
-public interface RequiredSkillRepo {
+import com.hireon.backend.Model.Director;
+import org.springframework.data.jpa.repository.JpaRepository;
+
+public interface RequiredSkillRepo extends JpaRepository<Director, Long> {
 }
