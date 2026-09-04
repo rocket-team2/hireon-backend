@@ -10,6 +10,8 @@ import com.hireon.backend.Repository.SkillRepo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 public class RequiredSkillsService {
     @Autowired
@@ -36,11 +38,34 @@ public class RequiredSkillsService {
         requiredSkill.setDrive(drive);
         requiredSkill.setSkill(skill);
         requiredSkill.setReqProficiency(
-                request.getReqProficiency()
+                request.getReqProficinecy());
         );
 
         return requiredSkillRepo.save(requiredSkill);
 
 
     }
+
+    public List<RequiredSkills> getAllRequiredSkill(Long driveId) {
+
+        return requiredSkillRepo.findByDriveId(driveId);
+    }
+
+    public RequiredSkills updateRequiredSkill(
+            Long  dirveId,
+            Long  skillId,
+            RequiredSkillRequest request){
+        RequiredSkills requiredSkills=requiredSkillRepo.findByDriveIdAndSkillId(dirveId,skillId)
+                .orElseThrow(()-> new RuntimeException("Requied skill not found"));
+        requiredSkills.setReqProficiency(request.getReqProficinecy());
+        return requiredSkillRepo.save(requiredSkills);
+    }
+
+    public RequiredSkills deleteRequiredSkill(Long driveId, Long skillId, RequiredSkillRequest request) {
+        RequiredSkills requiredSkills=requiredSkillRepo.findByDriveIdAndSkillId(dirveId,skillId)
+                .orElseThrow(()-> new RuntimeException("Requied skill not found"));
+        requiredSkills.setReqProficiency(request.getReqProficinecy());
+        return requiredSkillRepo.delete(requiredSkills);
+    }
+
 }
