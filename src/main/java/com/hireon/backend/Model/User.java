@@ -1,9 +1,11 @@
 package com.hireon.backend.Model;
 
 import jakarta.persistence.MappedSuperclass;
-import lombok.Data;
+import lombok.Getter;
+import lombok.Setter;
 
-@Data
+@Getter
+@Setter
 @MappedSuperclass
 public class User{
     private String name;
