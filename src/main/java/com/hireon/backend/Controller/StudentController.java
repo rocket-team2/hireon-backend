@@ -1,5 +1,6 @@
 package com.hireon.backend.Controller;
 
+import com.hireon.backend.Model.Company;
 import com.hireon.backend.Model.Student;
 import com.hireon.backend.Service.StudentService;
 import lombok.extern.slf4j.Slf4j;
@@ -22,9 +23,8 @@ public class StudentController {
         return new Student();
     }
 
-    @PostMapping("/add")
+    @PostMapping("/Add")
     public Student addStudent(@RequestBody Student student) {
-        log.info("inside controller");
         return studentService.addStudent(student);
     }
 
@@ -49,7 +49,7 @@ public class StudentController {
     }
 
     @PutMapping("/Status")
-    public Student updateStatus(@RequestParam Long id,String status,long comp_id){
+    public Student updateStatus(@RequestParam Long id, String status, Long comp_id){
         return studentService.updateStatus(id,status,comp_id);
     }
 

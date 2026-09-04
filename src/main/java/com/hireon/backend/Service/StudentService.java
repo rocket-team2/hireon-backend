@@ -1,5 +1,6 @@
 package com.hireon.backend.Service;
 
+import com.hireon.backend.Model.Company;
 import com.hireon.backend.Model.Student;
 import com.hireon.backend.Repository.StudentRepo;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,6 +15,9 @@ import java.util.Optional;
 public class StudentService {
     @Autowired
     private StudentRepo studentRepo;
+
+    @Autowired
+    private CompanyService companyService;
 
     public Student addStudent(Student student) {
         System.out.println("inside service");
@@ -52,14 +56,14 @@ public class StudentService {
         updateObj.setResume_url(student.getResume_url());
         updateObj.setLinkedin_url(student.getLinkedin_url());
         updateObj.setPlacement_status(student.getPlacement_status());
-        updateObj.setComp_id(student.getComp_id());
         return studentRepo.save(updateObj);
     }
 
-    public Student updateStatus(Long id, String status, long compId) {
+    public Student updateStatus(Long id, String status, Long comp_id) {
         Student updateObj = getStudent(id);
         updateObj.setPlacement_status(status);
-        updateObj.setComp_id(compId);
+        Company compObj = companyService.getCompany(comp_id);
+        updateObj.setCompany(compObj);
         return studentRepo.save(updateObj);
     }
 
