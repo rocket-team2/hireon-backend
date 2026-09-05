@@ -15,11 +15,11 @@ public class RequiredSkills {
     private Long req_id;
 
     @ManyToOne
-    @JoinColumn(name="dirve_id")
-    private  Drive dirve;
+    @JoinColumn(name = "drive_id")
+    private Drive drive;
 
     @ManyToOne
-    @JoinColumn(name="skill_id")
+    @JoinColumn(name = "skill_id")
     private Skill skill;
 
     private Integer reqProficiency;
