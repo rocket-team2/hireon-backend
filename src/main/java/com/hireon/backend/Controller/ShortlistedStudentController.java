@@ -1,5 +1,6 @@
 package com.hireon.backend.Controller;
 
+import com.hireon.backend.Enum.ShortlistStatus;
 import com.hireon.backend.Model.ShortlistedStudent;
 import com.hireon.backend.Service.ShortlistedStudentService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -39,7 +40,7 @@ public class ShortlistedStudentController {
     @PatchMapping("/shortlisted/{shortlistId}/status")
     public ShortlistedStudent updateStatus(
             @PathVariable Long shortlistId,
-            @RequestParam String status) {
+            @RequestParam ShortlistStatus status) {
 
         return service.updateStatus(shortlistId, status);
     }

@@ -64,7 +64,7 @@ public class ShortlistedStudentService {
 
     public ShortlistedStudent updateStatus(
             Long shortlistId,
-            String status) {
+            ShortlistStatus  status) {
 
         ShortlistedStudent shortlistedStudent =
                 shortlistedStudentRepo.findById(shortlistId)
@@ -122,5 +122,13 @@ public class ShortlistedStudentService {
                                         "Shortlist entry not found"));
 
         shortlistedStudentRepo.delete(shortlistedStudent);
+    }
+
+    public List<ShortlistedStudent> getStudentShortlisted(Long sId) {
+
+        studentRepo.findById(sId)
+                .orElseThrow(() -> new RuntimeException("Student not found"));
+
+        return shortlistedStudentRepo.findByStudent_SId(sId);
     }
 }
