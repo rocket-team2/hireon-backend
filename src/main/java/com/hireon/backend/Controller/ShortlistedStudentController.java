@@ -1,5 +1,12 @@
 package com.hireon.backend.Controller;
 
+import com.hireon.backend.Model.ShortlistedStudent;
+import com.hireon.backend.Service.ShortlistedStudentService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
+
 @RestController
 @RequestMapping
 public class ShortlistedStudentController {

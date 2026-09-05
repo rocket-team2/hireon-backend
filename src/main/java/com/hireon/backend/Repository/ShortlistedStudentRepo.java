@@ -1,4 +1,3 @@
-
 package com.hireon.backend.Repository;
 
 import com.hireon.backend.Model.ShortlistedStudent;
@@ -10,11 +9,11 @@ import java.util.Optional;
 public interface ShortlistedStudentRepo
         extends JpaRepository<ShortlistedStudent, Long> {
 
-    List<ShortlistedStudent> findByRoundId(Long roundId);
+    List<ShortlistedStudent> findByRound_RoundId(Long roundId);
 
-    List<ShortlistedStudent> findByStudentSId(Long sId);
+    List<ShortlistedStudent> findByStudent_SId(Long sId);
 
-    Optional<ShortlistedStudent> findByRoundIdAndStudentSId(
+    Optional<ShortlistedStudent> findByRound_RoundIdAndStudent_SId(
             Long roundId,
             Long sId
     );
