@@ -5,6 +5,6 @@ import org.springframework.stereotype.Repository;
 
 
 @Repository
-public interface DriveRepo extends JpaRepository<Drive,Integer> {
+public interface DriveRepo extends JpaRepository<Drive,Long> {
 
 }

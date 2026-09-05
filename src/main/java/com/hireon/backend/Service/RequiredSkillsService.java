@@ -4,6 +4,7 @@ import com.hireon.backend.Controller.RequiredSkillController;
 import com.hireon.backend.DTO.RequiredSkillRequest;
 import com.hireon.backend.Model.Drive;
 import com.hireon.backend.Model.RequiredSkills;
+import com.hireon.backend.Model.Skill;
 import com.hireon.backend.Repository.DriveRepo;
 import com.hireon.backend.Repository.RequiredSkillRepo;
 import com.hireon.backend.Repository.SkillRepo;
@@ -52,14 +53,14 @@ public class RequiredSkillsService {
         Drive drive  =driveRepo.findById(driveId).
                 orElseThrow(()->new RuntimeException("Drive not found"));
 
-        Drive skill= driveRepo.findById(request.getSkillId())
+        Skill skill= skillRepo.findById(request.getSkillId())
                 .orElseThrow(()->new RuntimeException("Drive not found"));
 
 
 
         RequiredSkills requiredSkill = new RequiredSkills();
 
-        requiredSkill.setDrive(drive);
+        requiredSkill.setDirve(drive);
         requiredSkill.setSkill(skill);
         requiredSkill.setReqProficiency(request.getReqProficinecy());
 
