@@ -11,8 +11,8 @@ import org.hibernate.annotations.ManyToAny;
 @NoArgsConstructor
 public class RequiredSkills {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY);
-    private long req_id;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long req_id;
 
     @ManyToOne
     @JoinColumn(name="dirve_id")
