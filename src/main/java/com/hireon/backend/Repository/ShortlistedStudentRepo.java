@@ -1,4 +1,6 @@
 package com.hireon.backend.Repository;
 
-public interface ShortlistedStudentRepo {
+import org.springframework.data.jpa.repository.JpaRepository;
+
+public interface ShortlistedStudentRepo extends JpaRepository<ShortlistedStudent,Long> {
 }
