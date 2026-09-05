@@ -22,7 +22,7 @@ public class RequiredSkills {
     @JoinColumn(name = "skill_id")
     private Skill skill;
 
-    private Integer reqProficiency;
+    private Double reqProficiency;
 
 
 
