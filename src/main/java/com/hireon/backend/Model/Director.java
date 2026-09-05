@@ -12,6 +12,4 @@ public class Director extends User {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private  long director_id;
-
-
 }
