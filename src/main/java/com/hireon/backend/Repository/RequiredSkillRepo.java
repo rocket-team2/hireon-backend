@@ -1,6 +1,4 @@
 package com.hireon.backend.Repository;
-
-import com.hireon.backend.Model.Director;
 import com.hireon.backend.Model.RequiredSkills;
 import org.springframework.data.jpa.repository.JpaRepository;
 
@@ -11,8 +9,5 @@ public interface RequiredSkillRepo extends JpaRepository<RequiredSkills,Long> {
 
     List<RequiredSkills> findByDriveId(Long driveId);
 
-    Optional<RequiredSkills> findByDriveIdAndSkillId(
-            Long driveId,
-            Long skillId
-    );
+    Optional<RequiredSkills> findByDriveIdAndSkillId( Long driveId,Long skillId);
 }

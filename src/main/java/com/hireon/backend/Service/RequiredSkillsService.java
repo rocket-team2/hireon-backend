@@ -50,19 +50,17 @@ public class RequiredSkillsService {
 
     public RequiredSkills addRequiedSkills(Long driveId, RequiredSkillRequest request) {
 
-        Drive drive  =driveRepo.findById(driveId).
-                orElseThrow(()->new RuntimeException("Drive not found"));
+        Drive drive = driveRepo.findById(driveId)
+        .orElseThrow(() -> new RuntimeException("drive not found"));
 
-        Skill skill= skillRepo.findById(request.getSkillId())
-                .orElseThrow(()->new RuntimeException("Drive not found"));
+Skill skill = skillRepo.findById(request.getSkillId())
+        .orElseThrow(() -> new RuntimeException("Skill not found"));
 
+    RequiredSkills requiredSkill = new RequiredSkills();
+requiredSkill.setDrive(drive);
+requiredSkill.setSkill(skill);
+requiredSkill.setReqProficiency(request.getReqProficinecy());
 
-
-        RequiredSkills requiredSkill = new RequiredSkills();
-
-        requiredSkill.setDirve(drive);
-        requiredSkill.setSkill(skill);
-        requiredSkill.setReqProficiency(request.getReqProficinecy());
 
 
         return requiredSkillRepo.save(requiredSkill);
