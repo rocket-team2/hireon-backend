@@ -7,7 +7,7 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import java.util.List;
 import java.util.Optional;
 
-public interface RequiredSkillRepo extends JpaRepository<Director, Long> {
+public interface RequiredSkillRepo extends JpaRepository<RequiredSkills,Long> {
 
     List<RequiredSkills> findByDriveId(Long driveId);
 

@@ -23,28 +23,7 @@ public class RequiredSkillsService {
 
     @Autowired
     private SkillRepo skillRepo;
-    public RequiredSkillController addRequiedSkill(Long driveId, RequiredSkillRequest request) {
 
-        Drive drive  =driveRepo.findById(driveId) .
-                orElseThrow(()->new RuntimeException("Drive not found"));
-
-        Drive skill= driveRepo.findById(request.getSkillId())
-                .orElseThrow(()->new RuntimeException("Drive not found"));
-
-
-
-        RequiredSkills requiredSkill = new RequiredSkills();
-
-        requiredSkill.setDrive(drive);
-        requiredSkill.setSkill(skill);
-        requiredSkill.setReqProficiency(
-                request.getReqProficinecy());
-        );
-
-        return requiredSkillRepo.save(requiredSkill);
-
-
-    }
 
     public List<RequiredSkills> getAllRequiredSkill(Long driveId) {
 
@@ -61,11 +40,32 @@ public class RequiredSkillsService {
         return requiredSkillRepo.save(requiredSkills);
     }
 
-    public RequiredSkills deleteRequiredSkill(Long driveId, Long skillId, RequiredSkillRequest request) {
-        RequiredSkills requiredSkills=requiredSkillRepo.findByDriveIdAndSkillId(dirveId,skillId)
+    public void deleteRequiredSkill(Long driveId, Long skillId, RequiredSkillRequest request) {
+        RequiredSkills requiredSkills=requiredSkillRepo.findByDriveIdAndSkillId(driveId,skillId)
                 .orElseThrow(()-> new RuntimeException("Requied skill not found"));
         requiredSkills.setReqProficiency(request.getReqProficinecy());
-        return requiredSkillRepo.delete(requiredSkills);
+         requiredSkillRepo.delete(requiredSkills);
     }
 
+    public RequiredSkills addRequiedSkills(Long driveId, RequiredSkillRequest request) {
+
+        Drive drive  =driveRepo.findById(driveId).
+                orElseThrow(()->new RuntimeException("Drive not found"));
+
+        Drive skill= driveRepo.findById(request.getSkillId())
+                .orElseThrow(()->new RuntimeException("Drive not found"));
+
+
+
+        RequiredSkills requiredSkill = new RequiredSkills();
+
+        requiredSkill.setDrive(drive);
+        requiredSkill.setSkill(skill);
+        requiredSkill.setReqProficiency(request.getReqProficinecy());
+
+
+        return requiredSkillRepo.save(requiredSkill);
+
+
+    }
 }

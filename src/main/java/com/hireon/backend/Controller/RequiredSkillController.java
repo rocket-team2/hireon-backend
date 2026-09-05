@@ -16,7 +16,7 @@ public class RequiredSkillController {
     @PostMapping("/{diveId}/required-skills")
     public RequiredSkills addRequiedSkill(@PathVariable Long driveId,
                                                    @RequestBody RequiredSkillRequest request){
-        return requiredSkillService.addRequiedSkill(driveId,request);
+        return requiredSkillService.addRequiedSkills(driveId,request);
     }
 
     @GetMapping("/{driveId}/required-skills")
@@ -38,12 +38,12 @@ public class RequiredSkillController {
     }
 
     @DeleteMapping("/{driveId}/required-skills/{skillId}")
-    public RequiredSkills deleteRequiredSkill(
+    public void deleteRequiredSkill(
             @PathVariable Long driveId,
             @PathVariable Long skillId,
             @RequestBody RequiredSkillRequest request) {
 
-        return requiredSkillService.deleteRequiredSkill(
+         requiredSkillService.deleteRequiredSkill(
                 driveId,
                 skillId,
                 request

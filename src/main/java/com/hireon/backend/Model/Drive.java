@@ -5,9 +5,9 @@ import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 
 @Entity
-public class Drive{
+public class Drive {
     private Long drive_id;
-//    @ManyToOne
-//    @JoinColumn(comp_id)
-//    private Company company;
+    // @ManyToOne
+    // @JoinColumn(comp_id)
+    // private Company company;
 }
