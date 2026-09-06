@@ -18,4 +18,9 @@ public interface ShortlistedStudentRepo
             Long roundId,
             Long sId
     );
+
+    List<ShortlistedStudent> findByRound_RoundIdAndStudent_Reg_noIn(
+            Long roundId,
+            List<String> regNos
+    );
 }

@@ -5,29 +5,28 @@ import com.hireon.backend.Service.DirectorService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
-
-
 @RestController
-@RequestMapping("/director")
+@RequestMapping("/directors")
 
 public class DirectorController {
     @Autowired
     private DirectorService directorService;
 
     @PostMapping("/register")
-    public Director register (@RequestBody Director director){
+    public Director register(@RequestBody Director director) {
         return directorService.register(director);
     }
 
-//    @PostMapping("/login")
-//    public  login (){
-//
-//    }
-//
+    // @PostMapping("/login")
+    // public login (){
+    //
+    // }
+    //
     @GetMapping("/{id}")
-    public  Director getDirector (@PathVariable Long id ){
+    public Director getDirector(@PathVariable Long id) {
         return directorService.getDirector(id);
     }
+
     @PutMapping("/{id}")
     public Director updateDirector(
             @PathVariable Long id,
@@ -36,9 +35,9 @@ public class DirectorController {
         return directorService.updateDirector(id, request);
     }
 
-//    }
-//
-//    @PutMapping("/{id}")
-//    public  updateDirector
+    // }
+    //
+    // @PutMapping("/{id}")
+    // public updateDirector
 
 }

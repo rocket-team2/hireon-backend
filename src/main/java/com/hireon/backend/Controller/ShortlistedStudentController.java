@@ -1,5 +1,6 @@
 package com.hireon.backend.Controller;
 
+import com.hireon.backend.DTO.AdvanceRoundRequest;
 import com.hireon.backend.Enum.ShortlistStatus;
 import com.hireon.backend.Model.ShortlistedStudent;
 import com.hireon.backend.Service.ShortlistedStudentService;
@@ -74,5 +75,13 @@ public class ShortlistedStudentController {
         service.deleteShortlist(shortlistId);
 
         return "Shortlist deleted successfully";
+    }
+
+    @PostMapping("/rounds/{fromRoundId}/advance")
+    public List<ShortlistedStudent> advanceRound(
+            @PathVariable Long fromRoundId,
+            @RequestBody AdvanceRoundRequest request) {
+
+        return service.advanceToNextRound(fromRoundId, request);
     }
 }

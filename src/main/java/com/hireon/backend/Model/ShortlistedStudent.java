@@ -16,10 +16,12 @@ public class ShortlistedStudent {
 
     @ManyToOne
     @JoinColumn(name = "round_id", nullable = false)
+    @com.fasterxml.jackson.annotation.JsonIgnoreProperties({"drive", "hibernateLazyInitializer", "handler"})
     private DriveRound round;
 
     @ManyToOne
     @JoinColumn(name = "s_id", nullable = false)
+    @com.fasterxml.jackson.annotation.JsonIgnoreProperties({"skills", "registrations", "hibernateLazyInitializer", "handler"})
     private Student student;
 
     @Enumerated(EnumType.STRING)

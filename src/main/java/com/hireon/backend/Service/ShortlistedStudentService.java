@@ -1,6 +1,7 @@
 
 package com.hireon.backend.Service;
 
+import com.hireon.backend.DTO.AdvanceRoundRequest;
 import com.hireon.backend.Enum.ShortlistStatus;
 import com.hireon.backend.Model.DriveRound;
 import com.hireon.backend.Model.ShortlistedStudent;
@@ -12,6 +13,7 @@ import com.hireon.backend.Repository.StudentRepo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -124,11 +126,52 @@ public class ShortlistedStudentService {
         shortlistedStudentRepo.delete(shortlistedStudent);
     }
 
-    public List<ShortlistedStudent> getStudentShortlisted(Long sId) {
+    public List<ShortlistedStudent> advanceToNextRound(
+            Long fromRoundId,
+            AdvanceRoundRequest request) {
 
-        studentRepo.findById(sId)
-                .orElseThrow(() -> new RuntimeException("Student not found"));
+        DriveRound toRound = driveRoundRepo.findById(request.getToRoundId())
+                .orElseThrow(() -> new RuntimeException("Target round not found"));
 
-        return shortlistedStudentRepo.findByStudent_SId(sId);
+        // get everyone in the current round
+        List<ShortlistedStudent> allInRound =
+                shortlistedStudentRepo.findByRound_RoundId(fromRoundId);
+
+        // get only the ones whose reg_no is in the punch list
+        List<ShortlistedStudent> advancing =
+                shortlistedStudentRepo.findByRound_RoundIdAndStudent_Reg_noIn(
+                        fromRoundId, request.getRegNos());
+
+        // mark advancing students as SELECTED in current round
+        for (ShortlistedStudent entry : advancing) {
+            entry.setStatus(ShortlistStatus.SELECTED);
+        }
+        shortlistedStudentRepo.saveAll(advancing);
+
+        // mark the rest as REJECTED in current round
+        List<Long> advancingIds = new ArrayList<>();
+        for (ShortlistedStudent entry : advancing) {
+            advancingIds.add(entry.getShortlistId());
+        }
+
+        for (ShortlistedStudent entry : allInRound) {
+            if (!advancingIds.contains(entry.getShortlistId())) {
+                entry.setStatus(ShortlistStatus.REJECTED);
+            }
+        }
+        shortlistedStudentRepo.saveAll(allInRound);
+
+        // create new PENDING entries in the next round for advancing students
+        List<ShortlistedStudent> newEntries = new ArrayList<>();
+        for (ShortlistedStudent entry : advancing) {
+            ShortlistedStudent next = new ShortlistedStudent();
+            next.setRound(toRound);
+            next.setStudent(entry.getStudent());
+            next.setStatus(ShortlistStatus.PENDING);
+            newEntries.add(next);
+        }
+
+        return shortlistedStudentRepo.saveAll(newEntries);
     }
+
 }

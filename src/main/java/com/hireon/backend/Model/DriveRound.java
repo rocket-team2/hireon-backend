@@ -19,6 +19,7 @@ public class DriveRound {
 
     @ManyToOne
     @JoinColumn(name = "drive_id", nullable = false)
+    @com.fasterxml.jackson.annotation.JsonIgnoreProperties({"rounds", "requiredSkills", "registrations", "hibernateLazyInitializer", "handler"})
     private Drive drive;
 
     @Column(name = "round_name")

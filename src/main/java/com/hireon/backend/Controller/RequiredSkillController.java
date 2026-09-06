@@ -3,6 +3,7 @@ package com.hireon.backend.Controller;
 import com.hireon.backend.DTO.RequiredSkillRequest;
 import com.hireon.backend.Model.RequiredSkills;
 import com.hireon.backend.Service.RequiredSkillsService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -10,16 +11,17 @@ import java.util.List;
 @RestController
 @RequestMapping("/drives")
 public class RequiredSkillController {
-    private  RequiredSkillsService requiredSkillService;
+    @Autowired
+    private RequiredSkillsService requiredSkillService;
 
     @PostMapping("/{driveId}/required-skills")
     public RequiredSkills addRequiedSkill(@PathVariable Long driveId,
-                                                   @RequestBody RequiredSkillRequest request){
-        return requiredSkillService.addRequiedSkills(driveId,request);
+            @RequestBody RequiredSkillRequest request) {
+        return requiredSkillService.addRequiedSkills(driveId, request);
     }
 
     @GetMapping("/{driveId}/required-skills")
-    public List<RequiredSkills> getAllRequiredSkill(@PathVariable Long driveId){
+    public List<RequiredSkills> getAllRequiredSkill(@PathVariable Long driveId) {
         return requiredSkillService.getAllRequiredSkill(driveId);
     }
 
@@ -32,8 +34,7 @@ public class RequiredSkillController {
         return requiredSkillService.updateRequiredSkill(
                 driveId,
                 skillId,
-                request
-        );
+                request);
     }
 
     @DeleteMapping("/{driveId}/required-skills/{skillId}")
@@ -42,12 +43,10 @@ public class RequiredSkillController {
             @PathVariable Long skillId,
             @RequestBody RequiredSkillRequest request) {
 
-         requiredSkillService.deleteRequiredSkill(
+        requiredSkillService.deleteRequiredSkill(
                 driveId,
                 skillId,
-                request
-        );
+                request);
     }
-
 
 }

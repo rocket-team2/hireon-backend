@@ -7,5 +7,5 @@ import lombok.NoArgsConstructor;
 public class RequiredSkillRequest {
 
     private Long skillId;
-    private Double reqProficinecy ;
+    private Double reqProficiency;
 }
