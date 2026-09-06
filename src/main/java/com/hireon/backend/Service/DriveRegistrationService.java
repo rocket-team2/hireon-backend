@@ -49,7 +49,8 @@ public class DriveRegistrationService {
         for (DriveRegistration registration : all) {
 
             if (registration.getDrive().getDriveId().equals(driveId)
-                    && registration.getStudent().getS_id().equals(studentId)) {
+                    && registration.getStudent().getSId().equals(studentId)) {
+
 
                 throw new RuntimeException(
                         "Student already registered for this drive");
@@ -105,7 +106,7 @@ public class DriveRegistrationService {
         for (DriveRegistration registration : all) {
 
             if (registration.getStudent()
-                    .getS_id()
+                    .getSId()
                     .equals(studentId)) {
 
                 result.add(registration);
@@ -131,7 +132,7 @@ public class DriveRegistrationService {
                     .equals(driveId)
                     &&
                     registration.getStudent()
-                            .getS_id()
+                            .getSId()
                             .equals(studentId)) {
 
                 driveRegistrationRepo.delete(registration);

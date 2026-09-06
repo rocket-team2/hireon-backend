@@ -17,7 +17,7 @@ public class StudentSkillController {
 
     @PostMapping("/{s_id}/skills")
     public ResponseEntity<StudentSkill> addSkill(@PathVariable long s_id, @RequestBody StudentSkill studentSkill) {
-        StudentSkill result = studentSkillService.addSkill(s_id, studentSkill.getSkill().getSkill_id(), studentSkill.getProficiency());
+        StudentSkill result = studentSkillService.addSkill(s_id, studentSkill.getSkill().getSkillId(), studentSkill.getProficiency());
         return ResponseEntity.ok(result);
     }
 

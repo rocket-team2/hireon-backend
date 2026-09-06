@@ -42,7 +42,7 @@ public class StudentService {
 
     public Student updateStudent(Student student) {
 
-        Student updateObj = getStudent(student.getS_id());
+        Student updateObj = getStudent(student.getSId());
 
         updateObj.setReg_no(student.getReg_no());
         updateObj.setName(student.getName());

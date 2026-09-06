@@ -28,21 +28,21 @@ public class RequiredSkillsService {
 
     public List<RequiredSkills> getAllRequiredSkill(Long driveId) {
 
-        return requiredSkillRepo.findByDriveId(driveId);
+        return requiredSkillRepo.findByDrive_DriveId(driveId);
     }
 
     public RequiredSkills updateRequiredSkill(
             Long  dirveId,
             Long  skillId,
             RequiredSkillRequest request){
-        RequiredSkills requiredSkills=requiredSkillRepo.findByDriveIdAndSkillId(dirveId,skillId)
+        RequiredSkills requiredSkills=requiredSkillRepo.findByDrive_DriveIdAndSkill_SkillId(dirveId,skillId)
                 .orElseThrow(()-> new RuntimeException("Requied skill not found"));
         requiredSkills.setReqProficiency(request.getReqProficinecy());
         return requiredSkillRepo.save(requiredSkills);
     }
 
     public void deleteRequiredSkill(Long driveId, Long skillId, RequiredSkillRequest request) {
-        RequiredSkills requiredSkills=requiredSkillRepo.findByDriveIdAndSkillId(driveId,skillId)
+        RequiredSkills requiredSkills=requiredSkillRepo.findByDrive_DriveIdAndSkill_SkillId(driveId,skillId)
                 .orElseThrow(()-> new RuntimeException("Requied skill not found"));
         requiredSkills.setReqProficiency(request.getReqProficinecy());
          requiredSkillRepo.delete(requiredSkills);

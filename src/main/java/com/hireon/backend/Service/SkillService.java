@@ -30,7 +30,7 @@ public class SkillService {
 
     public Skill upadateSkill(long id, Skill newskill) {
         Skill skill=skillRepository.findById(id).orElseThrow(() -> new RuntimeException("Skill not found"));
-        skill.setSkill_name(newskill.getSkill_name());
+        skill.setSkillName(newskill.getSkillName());
         return skillRepository.save(skill);
     }
 

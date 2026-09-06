@@ -41,7 +41,7 @@ public class StudentSkillService {
         List<StudentSkill> result = new ArrayList<>();
 
         for (StudentSkill studentSkill : all) {
-            if (studentSkill.getStudent().getS_id() == studentId) {
+            if (studentSkill.getStudent().getSId() == studentId) {
                 result.add(studentSkill);
             }
         }
@@ -51,8 +51,8 @@ public class StudentSkillService {
     public StudentSkill updateProficiency(long studentId, long skillId, double proficiency) {
         List<StudentSkill> all = studentSkillRepo.findAll();
         for (StudentSkill studentSkill : all) {
-            if (studentSkill.getStudent().getS_id() == studentId &&
-                    studentSkill.getSkill().getSkill_id() == skillId) {
+            if (studentSkill.getStudent().getSId() == studentId &&
+                    studentSkill.getSkill().getSkillId() == skillId) {
                 studentSkill.setProficiency(proficiency);
                 return studentSkillRepo.save(studentSkill);
             }
@@ -62,8 +62,8 @@ public class StudentSkillService {
     public void deleteSkill(long studentId, long skillId) {
         List<StudentSkill> all = studentSkillRepo.findAll();
         for (StudentSkill studentSkill : all) {
-            if (studentSkill.getStudent().getS_id() == studentId &&
-                    studentSkill.getSkill().getSkill_id() == skillId) {
+            if (studentSkill.getStudent().getSId() == studentId &&
+                    studentSkill.getSkill().getSkillId() == skillId) {
 
                 studentSkillRepo.delete(studentSkill);
                 return;
@@ -76,7 +76,7 @@ public class StudentSkillService {
         List<StudentSkill> all = studentSkillRepo.findAll();
         List<Student> result = new ArrayList<>();
         for (StudentSkill studentSkill : all) {
-            if (studentSkill.getSkill().getSkill_id() == skillId) {
+            if (studentSkill.getSkill().getSkillId() == skillId) {
                 result.add(studentSkill.getStudent());
             }
         }

@@ -18,7 +18,7 @@ import lombok.NoArgsConstructor;
 public class Student extends User{
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long s_id;
+    private Long sId;
     private String reg_no;
     private String department;
     private Integer batch_year;

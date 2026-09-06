@@ -7,7 +7,10 @@ import java.util.Optional;
 
 public interface RequiredSkillRepo extends JpaRepository<RequiredSkills,Long> {
 
-    List<RequiredSkills> findByDriveId(Long driveId);
 
-    Optional<RequiredSkills> findByDriveIdAndSkillId( Long driveId,Long skillId);
+    List<RequiredSkills> findByDrive_DriveId(Long driveId);
+    Optional<RequiredSkills> findByDrive_DriveIdAndSkill_SkillId(
+            Long driveId,
+            Long skillId
+    );
 }
