@@ -59,7 +59,7 @@ public class ShortlistedStudentService {
     public List<ShortlistedStudent> getShortlistedByStudent(Long studentId) {
 
 
-        return shortlistedStudentRepo.findByStudent_SId(studentId);
+        return shortlistedStudentRepo.findByStudent_sId(studentId);
     }
 
 
@@ -110,7 +110,7 @@ public class ShortlistedStudentService {
 
     public List<ShortlistedStudent> getStudentFeedback(Long studentId) {
 
-        return shortlistedStudentRepo.findByStudent_SId(studentId);
+        return shortlistedStudentRepo.findByStudent_sId(studentId);
     }
 
 
@@ -131,7 +131,7 @@ public class ShortlistedStudentService {
         studentRepo.findById(sId)
                 .orElseThrow(() -> new RuntimeException("Student not found"));
 
-        return shortlistedStudentRepo.findByStudent_SId(sId);
+        return shortlistedStudentRepo.findByStudent_sId(sId);
     }
 
     public List<ShortlistedStudent> advanceToNextRound(
