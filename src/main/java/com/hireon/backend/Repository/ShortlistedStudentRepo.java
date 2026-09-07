@@ -13,9 +13,9 @@ public interface ShortlistedStudentRepo
 
     List<ShortlistedStudent> findByRound_RoundId(Long roundId);
 
-    List<ShortlistedStudent> findByStudent_SId(Long sId);
+    List<ShortlistedStudent> findByStudent_sId(Long sId);
 
-    Optional<ShortlistedStudent> findByRound_RoundIdAndStudent_SId(
+    Optional<ShortlistedStudent> findByRound_RoundIdAndStudent_sId(
             Long roundId,
             Long sId
     );
