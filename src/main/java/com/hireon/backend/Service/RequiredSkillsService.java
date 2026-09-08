@@ -32,20 +32,19 @@ public class RequiredSkillsService {
     }
 
     public RequiredSkills updateRequiredSkill(
-            Long  dirveId,
-            Long  skillId,
+            Long driveId,
+            Long skillId,
             RequiredSkillRequest request){
-        RequiredSkills requiredSkills=requiredSkillRepo.findByDrive_DriveIdAndSkill_SkillId(dirveId,skillId)
-                .orElseThrow(()-> new RuntimeException("Requied skill not found"));
+        RequiredSkills requiredSkills=requiredSkillRepo.findByDrive_DriveIdAndSkill_SkillId(driveId,skillId)
+                .orElseThrow(()-> new RuntimeException("Required skill not found"));
         requiredSkills.setReqProficiency(request.getReqProficiency());
         return requiredSkillRepo.save(requiredSkills);
     }
 
-    public void deleteRequiredSkill(Long driveId, Long skillId, RequiredSkillRequest request) {
+    public void deleteRequiredSkill(Long driveId, Long skillId) {
         RequiredSkills requiredSkills=requiredSkillRepo.findByDrive_DriveIdAndSkill_SkillId(driveId,skillId)
-                .orElseThrow(()-> new RuntimeException("Requied skill not found"));
-        requiredSkills.setReqProficiency(request.getReqProficiency());
-         requiredSkillRepo.delete(requiredSkills);
+                .orElseThrow(()-> new RuntimeException("Required skill not found"));
+        requiredSkillRepo.delete(requiredSkills);
     }
 
     public RequiredSkills addRequiedSkills(Long driveId, RequiredSkillRequest request) {

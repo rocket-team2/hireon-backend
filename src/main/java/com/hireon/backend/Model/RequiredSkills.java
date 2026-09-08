@@ -16,6 +16,7 @@ public class RequiredSkills {
 
     @ManyToOne
     @JoinColumn(name = "drive_id")
+    @com.fasterxml.jackson.annotation.JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
     private Drive drive;
 
     @ManyToOne

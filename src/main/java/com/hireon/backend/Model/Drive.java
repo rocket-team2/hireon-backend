@@ -20,6 +20,7 @@ public class Drive {
     private Long driveId;
     @ManyToOne
     @JoinColumn(name="comp_id")
+    @com.fasterxml.jackson.annotation.JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
     private Company company;
     private String job_role;
     private int ctc_lpa;
@@ -27,6 +28,7 @@ public class Drive {
     private int target_cg_batch;
     @ManyToOne
     @JoinColumn(name = "created_by")
+    @com.fasterxml.jackson.annotation.JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
     private Director director;
     private String description;
     private LocalDateTime deadline;
