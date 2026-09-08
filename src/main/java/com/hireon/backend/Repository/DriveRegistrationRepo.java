@@ -25,7 +25,9 @@ public interface DriveRegistrationRepo extends JpaRepository<DriveRegistration, 
     @Query("SELECT r FROM DriveRegistration r WHERE r.student.sId = :studentId")
     List<DriveRegistration> findByStudentId(@Param("studentId") Long studentId);
 
-    boolean existsByDrive_DriveIdAndStudent_SId(Long driveId, Long studentId);
+    @Query("SELECT CASE WHEN COUNT(r) > 0 THEN true ELSE false END FROM DriveRegistration r WHERE r.drive.driveId = :driveId AND r.student.sId = :studentId")
+    boolean existsByDriveAndStudent(@Param("driveId") Long driveId, @Param("studentId") Long studentId);
 
-    Optional<DriveRegistration> findByDrive_DriveIdAndStudent_SId(Long driveId, Long studentId);
+    @Query("SELECT r FROM DriveRegistration r WHERE r.drive.driveId = :driveId AND r.student.sId = :studentId")
+    Optional<DriveRegistration> findByDriveAndStudent(@Param("driveId") Long driveId, @Param("studentId") Long studentId);
 }

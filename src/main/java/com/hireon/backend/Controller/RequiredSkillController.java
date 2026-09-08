@@ -40,13 +40,9 @@ public class RequiredSkillController {
     @DeleteMapping("/{driveId}/required-skills/{skillId}")
     public void deleteRequiredSkill(
             @PathVariable Long driveId,
-            @PathVariable Long skillId,
-            @RequestBody RequiredSkillRequest request) {
+            @PathVariable Long skillId) {
 
-        requiredSkillService.deleteRequiredSkill(
-                driveId,
-                skillId,
-                request);
+        requiredSkillService.deleteRequiredSkill(driveId, skillId);
     }
 
 }

@@ -25,7 +25,7 @@ public class DriveRegistrationService {
     private StudentRepo studentRepo;
 
     public DriveRegistration registerStudent(Long driveId, Long studentId) {
-        if (driveRegistrationRepo.existsByDrive_DriveIdAndStudent_SId(driveId, studentId)) {
+        if (driveRegistrationRepo.existsByDriveAndStudent(driveId, studentId)) {
             throw new RuntimeException("Student already registered for this drive");
         }
 
@@ -53,7 +53,7 @@ public class DriveRegistrationService {
 
     public void deleteRegistration(Long driveId, Long studentId) {
         DriveRegistration registration = driveRegistrationRepo
-                .findByDrive_DriveIdAndStudent_SId(driveId, studentId)
+                .findByDriveAndStudent(driveId, studentId)
                 .orElseThrow(() -> new RuntimeException("Registration not found"));
         driveRegistrationRepo.delete(registration);
     }
