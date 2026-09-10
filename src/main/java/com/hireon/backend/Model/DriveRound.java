@@ -39,4 +39,68 @@ public class DriveRound {
 
     @Column(name = "end_time")
     private LocalDateTime endTime;
+
+    public Long getRoundId() {
+        return roundId;
+    }
+
+    public void setRoundId(Long roundId) {
+        this.roundId = roundId;
+    }
+
+    public Drive getDrive() {
+        return drive;
+    }
+
+    public void setDrive(Drive drive) {
+        this.drive = drive;
+    }
+
+    public String getRoundName() {
+        return roundName;
+    }
+
+    public void setRoundName(String roundName) {
+        this.roundName = roundName;
+    }
+
+    public String getRoundLink() {
+        return roundLink;
+    }
+
+    public void setRoundLink(String roundLink) {
+        this.roundLink = roundLink;
+    }
+
+    public boolean isFinal() {
+        return isFinal;
+    }
+
+    public void setFinal(boolean aFinal) {
+        isFinal = aFinal;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
+    public LocalDateTime getStartTime() {
+        return startTime;
+    }
+
+    public void setStartTime(LocalDateTime startTime) {
+        this.startTime = startTime;
+    }
+
+    public LocalDateTime getEndTime() {
+        return endTime;
+    }
+
+    public void setEndTime(LocalDateTime endTime) {
+        this.endTime = endTime;
+    }
 }
