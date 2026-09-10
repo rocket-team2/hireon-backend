@@ -25,6 +25,11 @@ public class RequiredSkillController {
         return requiredSkillService.getAllRequiredSkill(driveId);
     }
 
+    @GetMapping("/all-required-skills")
+    public List<RequiredSkills> getAllRequiredSkills() {
+        return requiredSkillService.getAllRequiredSkills();
+    }
+
     @PutMapping("/{driveId}/required-skills/{skillId}")
     public RequiredSkills updateRequiredSkill(
             @PathVariable Long driveId,
