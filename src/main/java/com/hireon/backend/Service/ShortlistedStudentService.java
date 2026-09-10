@@ -31,9 +31,6 @@ public class ShortlistedStudentService {
     private DriveRoundRepo driveRoundRepo;
 
     @Autowired
-    private DriveRoundService driveRoundService;
-
-    public ShortlistedStudent shortlistStudent(Long roundId, Long studentId) {
     private DriveRegistrationRepo driveRegistrationRepo;
 
     @Autowired
@@ -92,9 +89,9 @@ public class ShortlistedStudentService {
         return shortlistedStudentRepo.save(shortlistedStudent);
     }
 
-
     @Transactional
     public List<ShortlistedStudent> getShortlistedByRound(Long roundId) {
+        autoInitializeRound1(roundId);
 
         DriveRound currentRound = driveRoundRepo.findById(roundId)
                 .orElseThrow(() -> new RuntimeException("Round not found"));
@@ -149,8 +146,6 @@ public class ShortlistedStudentService {
             }
         }
 
-    public List<ShortlistedStudent> getShortlistedByRound(Long roundId) {
-        autoInitializeRound1(roundId);
         return shortlistedStudentRepo.findByRound_RoundId(roundId);
     }
 
@@ -158,55 +153,16 @@ public class ShortlistedStudentService {
         return shortlistedStudentRepo.findByStudent_sId(studentId);
     }
 
-    public ShortlistedStudent updateStatus(Long shortlistId, ShortlistStatus status) {
-        ShortlistedStudent shortlistedStudent = shortlistedStudentRepo.findById(shortlistId)
-                .orElseThrow(() -> new RuntimeException("Shortlist entry not found"));
-
-        shortlistedStudent.setStatus(status);
-        ShortlistedStudent saved = shortlistedStudentRepo.save(shortlistedStudent);
-
-        DriveRound currentRound = saved.getRound();
-        if (currentRound != null && currentRound.getDrive() != null) {
-            Long driveId = currentRound.getDrive().getDriveId();
-            List<DriveRound> allRounds = driveRoundService.getAllRounds(driveId);
-            int currentIndex = -1;
-            for (int i = 0; i < allRounds.size(); i++) {
-                if (allRounds.get(i).getRoundId().equals(currentRound.getRoundId())) {
-                    currentIndex = i;
-                    break;
-                }
-            }
-
     @Transactional
     public ShortlistedStudent updateStatus(
             Long shortlistId,
             ShortlistStatus status) {
-            if (currentIndex >= 0 && currentIndex < allRounds.size() - 1) {
-                DriveRound nextRound = allRounds.get(currentIndex + 1);
-                Optional<ShortlistedStudent> nextEntryOpt = shortlistedStudentRepo
-                        .findByRound_RoundIdAndStudent_sId(nextRound.getRoundId(), saved.getStudent().getSId());
 
-                if (status == ShortlistStatus.SELECTED) {
-                    if (nextEntryOpt.isEmpty()) {
-                        ShortlistedStudent nextEntry = new ShortlistedStudent();
-                        nextEntry.setRound(nextRound);
-                        nextEntry.setStudent(saved.getStudent());
-                        nextEntry.setStatus(ShortlistStatus.PENDING);
-                        shortlistedStudentRepo.save(nextEntry);
-                    } else if (nextEntryOpt.get().getStatus() == ShortlistStatus.REJECTED) {
-                        nextEntryOpt.get().setStatus(ShortlistStatus.PENDING);
-                        shortlistedStudentRepo.save(nextEntryOpt.get());
-                    }
-                } else if (status == ShortlistStatus.REJECTED || status == ShortlistStatus.PENDING) {
-                    if (nextEntryOpt.isPresent() && nextEntryOpt.get().getStatus() == ShortlistStatus.PENDING) {
-                        shortlistedStudentRepo.delete(nextEntryOpt.get());
-                    }
-                }
-            }
-        }
-
-        return saved;
-    }
+        ShortlistedStudent shortlistedStudent =
+                shortlistedStudentRepo.findById(shortlistId)
+                        .orElseThrow(() ->
+                                new RuntimeException(
+                                        "Shortlist entry not found"));
 
         shortlistedStudent.setStatus(status);
         ShortlistedStudent saved = shortlistedStudentRepo.save(shortlistedStudent);
@@ -281,6 +237,8 @@ public class ShortlistedStudentService {
 
         return saved;
     }
+
+    @Transactional
     public List<ShortlistedStudent> processRoundExcel(Long roundId, List<String> regNos) {
         DriveRound currentRound = driveRoundRepo.findById(roundId)
                 .orElseThrow(() -> new RuntimeException("Round not found"));
@@ -344,6 +302,12 @@ public class ShortlistedStudentService {
                         existingNext.setStatus(ShortlistStatus.PENDING);
                         toSaveNext.add(existingNext);
                     }
+                } else if (currentIndex == allRounds.size() - 1 || currentRound.isFinal()) {
+                    if (currentRound.getDrive().getCompany() != null) {
+                        student.setPlacement_status("Placed");
+                        student.setCompany(currentRound.getDrive().getCompany());
+                        studentRepo.save(student);
+                    }
                 }
             } else {
                 entry.setStatus(ShortlistStatus.REJECTED);
@@ -353,6 +317,13 @@ public class ShortlistedStudentService {
                     ShortlistedStudent existingNext = nextRoundStudentMap.get(student.getSId());
                     if (existingNext != null && existingNext.getStatus() == ShortlistStatus.PENDING) {
                         toDeleteNext.add(existingNext);
+                    }
+                } else if (currentIndex == allRounds.size() - 1 || currentRound.isFinal()) {
+                    if (student.getCompany() != null && currentRound.getDrive().getCompany() != null &&
+                            student.getCompany().getComp_id().equals(currentRound.getDrive().getCompany().getComp_id())) {
+                        student.setPlacement_status("Not Placed");
+                        student.setCompany(null);
+                        studentRepo.save(student);
                     }
                 }
             }
