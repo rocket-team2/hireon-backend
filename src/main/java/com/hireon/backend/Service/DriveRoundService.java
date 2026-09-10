@@ -55,7 +55,7 @@ public class DriveRoundService {
 
         for (DriveRound round : all) {
 
-            if (round.getDrive().getDriveId().equals(driveId)) {
+            if (round.getDrive() != null && round.getDrive().getDriveId().equals(driveId)) {
                 result.add(round);
             }
         }
@@ -67,6 +67,8 @@ public class DriveRoundService {
                                 Comparator.naturalOrder()
                         )
                 )
+                .thenComparing(DriveRound::isFinal)
+                .thenComparing(DriveRound::getRoundId)
         );
 
         return result;

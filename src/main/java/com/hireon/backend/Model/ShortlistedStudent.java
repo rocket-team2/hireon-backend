@@ -30,4 +30,44 @@ public class ShortlistedStudent {
 
     @Column(name = "feedback_url")
     private String feedbackUrl;
+
+    public Long getShortlistId() {
+        return shortlistId;
+    }
+
+    public void setShortlistId(Long shortlistId) {
+        this.shortlistId = shortlistId;
+    }
+
+    public DriveRound getRound() {
+        return round;
+    }
+
+    public void setRound(DriveRound round) {
+        this.round = round;
+    }
+
+    public Student getStudent() {
+        return student;
+    }
+
+    public void setStudent(Student student) {
+        this.student = student;
+    }
+
+    public ShortlistStatus getStatus() {
+        return status;
+    }
+
+    public void setStatus(ShortlistStatus status) {
+        this.status = status;
+    }
+
+    public String getFeedbackUrl() {
+        return feedbackUrl;
+    }
+
+    public void setFeedbackUrl(String feedbackUrl) {
+        this.feedbackUrl = feedbackUrl;
+    }
 }
