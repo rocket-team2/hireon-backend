@@ -31,6 +31,10 @@ public class RequiredSkillsService {
         return requiredSkillRepo.findByDrive_DriveId(driveId);
     }
 
+    public List<RequiredSkills> getAllRequiredSkills() {
+        return requiredSkillRepo.findAll();
+    }
+
     public RequiredSkills updateRequiredSkill(
             Long driveId,
             Long skillId,
