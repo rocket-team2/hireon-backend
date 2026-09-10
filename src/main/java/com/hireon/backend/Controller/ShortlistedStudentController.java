@@ -1,6 +1,7 @@
 package com.hireon.backend.Controller;
 
 import com.hireon.backend.DTO.AdvanceRoundRequest;
+import com.hireon.backend.DTO.ProcessRoundRequest;
 import com.hireon.backend.Enum.ShortlistStatus;
 import com.hireon.backend.Model.ShortlistedStudent;
 import com.hireon.backend.Service.ShortlistedStudentService;
@@ -29,6 +30,14 @@ public class ShortlistedStudentController {
             @PathVariable Long roundId) {
 
         return service.getShortlistedByRound(roundId);
+    }
+
+    @PostMapping("/rounds/{roundId}/process-excel")
+    public List<ShortlistedStudent> processRoundExcel(
+            @PathVariable Long roundId,
+            @RequestBody ProcessRoundRequest request) {
+
+        return service.processRoundExcel(roundId, request.getRegNos());
     }
 
     @GetMapping("/students/{sId}/shortlisted")
