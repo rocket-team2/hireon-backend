@@ -13,13 +13,13 @@ public interface ShortlistedStudentRepo extends JpaRepository<ShortlistedStudent
 
     @EntityGraph(attributePaths = {
             "student", "student.company",
-            "round", "round.drive", "round.drive.company"
+            "round", "round.drive", "round.drive.company", "round.drive.director"
     })
     List<ShortlistedStudent> findByRound_RoundId(Long roundId);
 
     @EntityGraph(attributePaths = {
             "student", "student.company",
-            "round", "round.drive", "round.drive.company"
+            "round", "round.drive", "round.drive.company", "round.drive.director"
     })
     List<ShortlistedStudent> findByStudent_sId(Long sId);
 

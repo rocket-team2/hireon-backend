@@ -149,6 +149,7 @@ public class ShortlistedStudentService {
         return shortlistedStudentRepo.findByRound_RoundId(roundId);
     }
 
+    @Transactional
     public List<ShortlistedStudent> getShortlistedByStudent(Long studentId) {
         return shortlistedStudentRepo.findByStudent_sId(studentId);
     }
@@ -366,6 +367,7 @@ public class ShortlistedStudentService {
         shortlistedStudentRepo.delete(shortlistedStudent);
     }
 
+    @Transactional
     public List<ShortlistedStudent> getStudentShortlisted(Long sId) {
         studentRepo.findById(sId)
                 .orElseThrow(() -> new RuntimeException("Student not found"));
