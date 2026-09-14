@@ -16,7 +16,7 @@ public class ShortlistedStudent {
 
     @ManyToOne
     @JoinColumn(name = "round_id", nullable = false)
-    @com.fasterxml.jackson.annotation.JsonIgnoreProperties({"drive", "hibernateLazyInitializer", "handler"})
+    @com.fasterxml.jackson.annotation.JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
     private DriveRound round;
 
     @ManyToOne
